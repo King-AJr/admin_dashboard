@@ -6,16 +6,13 @@ import { GrDocumentTime } from "react-icons/gr";
 import { Link } from "react-router-dom";
 import RecentOrderRow from "../components/RecentOrderRow";
 import OrderItem from "../components/MobileOrderItem";
+import { useContext } from "react";
+import { DataContext } from "../context/DataProvider";
 
 
 const DashBoard = () => {
-    const orders = [
-        { id: '#1234', date: 'Jan 12, 2023', customer: 'Jane Smith', amount: '$100', status: 'Delivered' },
-        { id: '#1235', date: 'Jan 11, 2023', customer: 'John Doe', amount: '$50', status: 'In transit' },
-        { id: '#1236', date: 'Jan 10, 2023', customer: 'Alice Johnson', amount: '$75', status: 'Delivered' },
-        { id: '#1237', date: 'Jan 9, 2023', customer: 'Bob Brown', amount: '$200', status: 'In transit' },
-        { id: '#1238', date: 'Jan 8, 2023', customer: 'Eva Davis', amount: '$30', status: 'Delivered' },
-      ];    
+    const { orders } = useContext(DataContext);
+    
     return (
         <Dashboardlayout>
             <div className="h-screen overflow-x-auto px-8 py-8 bg-white">

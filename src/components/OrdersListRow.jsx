@@ -1,10 +1,8 @@
-// src/TableRow.js
-import React, { useState } from 'react';
 import { IoIosPrint } from 'react-icons/io';
 import { IoEye } from 'react-icons/io5';
 
 const OrdersListRow = ({ order, id, status, orderId, customerImage, customerName, quantity, price, statusColor, date  }) => {
-  const [editTooltip, setEditTooltip] = useState(false);
+
 
   return (
     <tr className="bg-white border-b last:border-0 text-start mx-9">

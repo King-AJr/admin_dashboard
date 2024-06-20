@@ -1,7 +1,8 @@
 import DashboardLayout from "../components/DashboardLayout"
 import { useContext } from "react";
 import { DataContext } from "../context/DataProvider";
-import { MdOutlineDelete, MdOutlineEdit } from 'react-icons/md';
+import RecentOrderRow from "../components/RecentOrderRow";
+import OrderItem from "../components/MobileOrderItem";
 
 
 const Orders = () => {
@@ -10,47 +11,38 @@ const Orders = () => {
   
     return (
         <DashboardLayout>
-        <div className="overflow-x-auto border rounded-lg px-8 py-4">
-            <table className="min-w-full bg-white border border-gray-200 rounded-lg">
-                <thead>
-                    <tr>
-                        <th className="py-2 px-4 border-b">Order ID</th>
-                        <th className="py-2 px-4 border-b">Customer Name</th>
-                        <th className="py-2 px-4 border-b">Product Name</th>
-                        <th className="py-2 px-4 border-b">Quantity</th>
-                        <th className="py-2 px-4 border-b">Price</th>
-                        <th className="py-2 px-4 border-b">Status</th>
-                        <th className="py-2 px-4 border-b">Date</th>
-                        <th className="py-2 px-4 border-b">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {orders.map(order => (
-                        <tr key={order.id}>
-                            <td className="py-2 px-4 border-b">{order.id}</td>
-                            <td className="py-2 px-4 border-b">{order.CustomerName}</td>
-                            <td className="py-2 px-4 border-b">{order.ProductName}</td>
-                            <td className="py-2 px-4 border-b">{order.quantity}</td>
-                            <td className="py-2 px-4 border-b">{order.price}</td>
-                            <td className="py-2 px-4 border-b">{order.status}</td>
-                            <td className="py-2 px-4 border-b">{order.date}</td>
-                            <td className="py-2 px-4 border-b">
-                                <div className="flex justify-center space-x-2">
-                                    <button
-                                    className="flex justify-center items-center w-10 h-10 leading-10 text-tiny bg-green-500 text-white rounded-md hover:bg-green-600"
-                                    >
-                                        <MdOutlineEdit/>
-                                    </button>
-                                    <button className="flex justify-center items-center w-10 h-10 leading-10 text-tiny bg-white border border-gray text-slate-600 rounded-md hover:bg-danger hover:border-danger hover:text-white">
-                                        <MdOutlineDelete/>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
+        <div className="h-screen p-8 mx-auto mt-12 bg-white shadow-md rounded-lg">
+                    <h2 className="text-xl font-semibold p-4 border-b border-mygrey">Recent orders</h2>
+                    
+                    {/* Table view for larger screens */}
+                    <div className="hidden md:block max-h-[300px] overflow-x-auto py-4 mb-16">
+                        <div className="relative border border-mygrey rounded-2xl bg-white">
+                        <table className="bg-white w-full text-xs text-left text-black font-jarkata">
+                            <thead className="bg-white weight-300">
+                            <tr className="border-b text-sm">
+                                <th scope="col" className="pl-4 pr-8 py-4 text-sm font-semibold">Order</th>
+                                <th scope="col" className="px-3 py-3 text-sm font-semibold">Date</th>
+                                <th scope="col" className="px-3 py-3 text-sm font-semibold">Customer</th>
+                                <th scope="col" className="px-3 py-3 text-sm font-semibold">Amount</th>
+                                <th scope="col" className="px-3 py-3 text-sm font-semibold">Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {orders.map(order => (
+                                <RecentOrderRow key={order.id} order={order} />
+                            ))}
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                    
+                    {/* List view for smaller screens */}
+                    <div className="md:hidden mb-16">
+                        {orders.map(order => (
+                        <OrderItem key={order.id} order={order} />
+                        ))}
+                    </div>
+                </div>
         </DashboardLayout>
     )
 }
