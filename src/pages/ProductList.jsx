@@ -4,6 +4,7 @@ import productOne from "../assets/img/product/prodcut-1.jpg";
 import productTwo from "../assets/img/product/prodcut-2.jpg";
 import productFour from "../assets/img/product/prodcut-4.jpg";
 import { Link } from "react-router-dom";
+import { IoSearch } from "react-icons/io5";
 
 
 const ProductList = () => {
@@ -53,16 +54,13 @@ const ProductList = () => {
                         <div className="search-input relative">
                             <input className="input h-[30px] w-full pl-14" type="text" placeholder="Search by product name"/>
                             <button className="absolute top-1/2 left-5 translate-y-[-50%] hover:text-theme">
-                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M18.9999 19L14.6499 14.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg>
+                                <IoSearch/>
                             </button>
                         </div>
                         <div className="flex justify-end space-x-6">
                             <div className="search-select mr-3 flex items-center space-x-3 ">
                                 <span className="text-xs inline-block leading-none -translate-y-[2px]">Status : </span>
-                                <select className="text-xs">
+                                <select className="text-xs mb-1">
                                     <option>Active</option>
                                     <option>In Active</option>
                                     <option>Scheduled</option>
@@ -70,40 +68,44 @@ const ProductList = () => {
                                     <option>Out of Stock</option>
                                 </select>
                             </div>
-                            <div className="text-xs flex ">
-                                <Link to={'/add_product'} className="tp-btn px-5 py-2">Add Product</Link>
+                            <div className=" mb-7 flex justify-center items-center">
+                             <Link to={'/add_product'} >
+                                <button className='h-10 w-18 text-xs md:h-[40px] md:w-[100px] rounded-lg bg-myRed text-white px-2 py-1 md:text-xs'>
+                                    Add Product
+                                </button>
+                             </Link>
                             </div>
                         </div>
                     </div>
-                    <div class="relative overflow-x-auto mx-8">
-                    <table class="w-full text-base text-left text-gray-500">
-                    <thead class="bg-white">
-                                <tr class="text-xs border-b border-gray6 text-tiny">
-                                    <th scope="col" class=" py-3 text-tiny text-text2 uppercase font-semibold w-[3%]">
-                                        <div class="tp-checkbox -translate-y-[3px]">
+                    <div className="relative overflow-x-auto mx-8 mb-12">
+                    <table className="w-full text-base text-left  text-gray-500">
+                    <thead className="bg-white">
+                                <tr className="text-xs border-b border-gray6 text-tiny">
+                                    <th scope="col" className=" py-3 text-tiny text-text2 uppercase font-semibold w-[3%]">
+                                        <div className="tp-checkbox -translate-y-[3px]">
                                             <input id="selectAllProduct" type="checkbox"/>
                                             <label for="selectAllProduct"></label>
                                         </div>
                                     </th>
-                                    <th scope="col" class="pr-8 py-3 text-tiny text-text2 uppercase font-semibold">
+                                    <th scope="col" className="pr-8 py-3 text-tiny text-text2 uppercase font-semibold">
                                         Product 
                                     </th>
-                                    <th scope="col" class="px-3 py-3 text-tiny text-text2 uppercase font-semibold w-[170px] text-end">
+                                    <th scope="col" className="px-3 py-3 text-tiny text-text2 uppercase font-semibold w-[170px] text-end">
                                         SKU
                                     </th>
-                                    <th scope="col" class="px-3 py-3 text-tiny text-text2 uppercase font-semibold w-[170px] text-end">
+                                    <th scope="col" className="px-3 py-3 text-tiny text-text2 uppercase font-semibold w-[170px] text-end">
                                         QTY
                                     </th>
-                                    <th scope="col" class="px-3 py-3 text-tiny text-text2 uppercase font-semibold w-[170px] text-end">
+                                    <th scope="col" className="px-3 py-3 text-tiny text-text2 uppercase font-semibold w-[170px] text-end">
                                         Price
                                     </th>
-                                    <th scope="col" class="px-3 py-3 text-tiny text-text2 uppercase font-semibold w-[170px] text-end">
+                                    <th scope="col" className="px-3 py-3 text-tiny text-text2 uppercase font-semibold w-[170px] text-end">
                                         Rating
                                     </th>
-                                    <th scope="col" class="px-3 py-3 text-tiny text-text2 uppercase font-semibold w-[170px] text-end">
+                                    <th scope="col" className="px-3 py-3 text-tiny text-text2 uppercase font-semibold w-[170px] text-end">
                                         Status
                                     </th>
-                                    <th scope="col" class="px-9 py-3 text-tiny text-text2 uppercase  font-semibold w-[12%] text-end">
+                                    <th scope="col" className="px-9 py-3 text-tiny text-text2 uppercase  font-semibold w-[12%] text-end">
                                         Action
                                     </th>
                                 </tr>

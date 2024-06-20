@@ -3,28 +3,33 @@ import Dashboardlayout from "../components/DashboardLayout"
 import Cards from "../components/Cards";
 import { TbAntennaBars5, TbUsersGroup } from "react-icons/tb";
 import { GrDocumentTime } from "react-icons/gr";
-import TableRow from "../components/TableRow";
 import { Link } from "react-router-dom";
+import RecentOrderRow from "../components/RecentOrderRow";
+import OrderItem from "../components/MobileOrderItem";
 
 
 const DashBoard = () => {
-    const rows = [
-        { item: 'Apple MacBook Pro 17"', productId: '#XY-25G', price: '$2999.00', status: { text: 'Active', bg: 'bg-success/10', color: 'text-success' }, action: <button className="bg-info/10 text-info hover:bg-info hover:text-white inline-block text-center leading-5 text-tiny font-medium py-2 px-4 rounded-md">View</button> },
-        { item: 'Gigabyte Gaming Monitor 4K', productId: '#JK-10A', price: '$599.00', status: { text: 'Disabled', bg: 'bg-danger/10', color: 'text-danger' }, action: <button className="bg-info/10 text-info hover:bg-info hover:text-white inline-block text-center leading-5 text-tiny font-medium py-2 px-4 rounded-md">View</button> },
-        { item: 'Logitech G502 Hero Mouse', productId: '#LG-502', price: '$1199.59', status: { text: 'Disabled', bg: 'bg-warning/10', color: 'text-warning' }, action: <button className="bg-info/10 text-info hover:bg-info hover:text-white inline-block text-center leading-5 text-tiny font-medium py-2 px-4 rounded-md">View</button> },
-        { item: 'Galaxy S22 Ultra Gray', productId: '#GL-S22', price: '$1800.00', status: { text: 'Active', bg: 'bg-success/10', color: 'text-success' }, action: <button className="bg-info/10 text-info hover:bg-info hover:text-white inline-block text-center leading-5 text-tiny font-medium py-2 px-4 rounded-md">View</button> },
-        { item: 'Galaxy S22 Ultra Gray', productId: '#GL-S22', price: '$1800.00', status: { text: 'Active', bg: 'bg-success/10', color: 'text-success' }, action: <button className="bg-info/10 text-info hover:bg-info hover:text-white inline-block text-center leading-5 text-tiny font-medium py-2 px-4 rounded-md">View</button> },
-    ];
+    const orders = [
+        { id: '#1234', date: 'Jan 12, 2023', customer: 'Jane Smith', amount: '$100', status: 'Delivered' },
+        { id: '#1235', date: 'Jan 11, 2023', customer: 'John Doe', amount: '$50', status: 'In transit' },
+        { id: '#1236', date: 'Jan 10, 2023', customer: 'Alice Johnson', amount: '$75', status: 'Delivered' },
+        { id: '#1237', date: 'Jan 9, 2023', customer: 'Bob Brown', amount: '$200', status: 'In transit' },
+        { id: '#1238', date: 'Jan 8, 2023', customer: 'Eva Davis', amount: '$30', status: 'Delivered' },
+      ];    
     return (
         <Dashboardlayout>
-            <div className="h-screen overflow-x-auto body-content px-8 py-8 bg-slate-100">
+            <div className="h-screen overflow-x-auto px-8 py-8 bg-white">
                 <div className="flex justify-between items-end flex-wrap">
                     <div className="page-title mb-7">
-                        <h3 className="mb-0 text-4xl">Dashboard</h3>
-                        <p className="text-textBody m-0">Welcome to your dashboard</p>
+                        <h3 className="mb-1 sm:text-3xl md:text-4xl font-poppins font-medium">Dashboard</h3>
+                        <p className="text-xs m-0 font-jarkata">Welcome to your dashboard</p>
                     </div>
                     <div className=" mb-7">
-                        <Link to={'/add_product'} className="tp-btn px-5 py-2">Add Product</Link>
+                        <Link to={'/add_product'} >
+                            <button className='sm: text-xs h-[40px] w-[120px] rounded-lg bg-myRed text-white px-4 py-2 md:text-sm'>
+                                Add Product
+                            </button>
+                            </Link>
                     </div>
                 </div>
                 {/* cards */}
@@ -42,26 +47,38 @@ const DashBoard = () => {
                     <Cards title={"580"} subtitle={"Pending Orders"} percentage={10} icon={GrDocumentTime} spanColor="bg-warning" svgColor="text-warning bg-warning/10"/>
                 </div>
                 {/* table */}
-                <div className="max-h-[300px] overflow-x-auto md:overflow-visible">
-                <div className="w-[700px] lg:w-full">
-                    <table className="w-full text-base text-left text-gray-500">
-                        <thead className="bg-white">
-                            <tr className="border-b border-gray6 text-tiny">
-                                <th scope="col" className="pl-4 pr-8 py-3 text-tiny text-text2 uppercase font-semibold">Item</th>
-                                <th scope="col" className="px-3 py-3 text-tiny text-text2 uppercase font-semibold">Product ID</th>
-                                <th scope="col" className="px-3 py-3 text-tiny text-text2 uppercase font-semibold">Price</th>
-                                <th scope="col" className="px-3 py-3 text-tiny text-text2 uppercase font-semibold">Status</th>
-                                <th scope="col" className="px-3 py-3 text-tiny text-text2 uppercase font-semibold w-14">Action</th>
+                <div className=" mx-auto mt-12 bg-white shadow-md rounded-lg">
+                    <h2 className="text-xl font-semibold p-4 border-b border-mygrey">Recent orders</h2>
+                    
+                    {/* Table view for larger screens */}
+                    <div className="hidden md:block max-h-[300px] overflow-x-auto py-4 mb-16">
+                        <div className="relative border border-mygrey rounded-2xl bg-white">
+                        <table className="bg-white w-full text-xs text-left text-black font-jarkata">
+                            <thead className="bg-white weight-300">
+                            <tr className="border-b text-sm">
+                                <th scope="col" className="pl-4 pr-8 py-4 text-sm font-semibold">Order</th>
+                                <th scope="col" className="px-3 py-3 text-sm font-semibold">Date</th>
+                                <th scope="col" className="px-3 py-3 text-sm font-semibold">Customer</th>
+                                <th scope="col" className="px-3 py-3 text-sm font-semibold">Amount</th>
+                                <th scope="col" className="px-3 py-3 text-sm font-semibold">Status</th>
                             </tr>
-                        </thead>
-                        <tbody>
-                            {rows.map((row, index) => (
-                                <TableRow key={index} {...row} />
+                            </thead>
+                            <tbody>
+                            {orders.map(order => (
+                                <RecentOrderRow key={order.id} order={order} />
                             ))}
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                    
+                    {/* List view for smaller screens */}
+                    <div className="md:hidden mb-16">
+                        {orders.map(order => (
+                        <OrderItem key={order.id} order={order} />
+                        ))}
+                    </div>
                 </div>
-            </div>
             </div>
         </Dashboardlayout>
         

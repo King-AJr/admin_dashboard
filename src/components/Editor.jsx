@@ -3,15 +3,16 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // import styles
 import "../assets/css/editor.css"
 
-const Editor = () => {
-  const [value, setValue] = useState('');
+const Editor = ({description, handleInputChange}) => {
+  //const [value, setValue] = useState('');
 
   return (
     <div className="editor-container">
       <h4 className="text-base text-black mb-2">Description</h4>
       <ReactQuill
-        value={value}
-        onChange={setValue}
+        value={description}
+        name='description'
+        onChange={(value) => handleInputChange('description', value)}
         placeholder="Compose an epic..."
         modules={{
           toolbar: [

@@ -5,9 +5,9 @@ import { MdOutlineDelete, MdOutlineEdit } from "react-icons/md";
 
 const ProductListRow = ({ id, productName, productImage, productId, quantity, price, rating, status }) => {
   return (
-    <tr class="bg-white border-b border-gray6 last:border-0 text-start mx-9">
-        <td  class="pr-3  whitespace-nowrap">
-            <div class="tp-checkbox">
+    <tr className="bg-white border-b border-gray6 last:border-0 text-start mx-9">
+        <td  className="pr-3  whitespace-nowrap">
+            <div className="tp-checkbox">
                 <input id={`product-${id}`} type="checkbox" />
           <label htmlFor={`product-${id}`}></label>
              </div>
@@ -42,8 +42,8 @@ const ProductListRow = ({ id, productName, productImage, productId, quantity, pr
               <MdOutlineEdit/>
             </button>
           </div>
-          <div class="relative" x-data="{ deleteTooltip: false }">
-                <button class="flex justify-center items-center w-10 h-10 leading-[33px] text-tiny bg-white border border-gray text-slate-600 rounded-md hover:bg-danger hover:border-danger hover:text-white">
+          <div className="relative" x-data="{ deleteTooltip: false }">
+                <button className="flex justify-center items-center w-10 h-10 leading-[33px] text-tiny bg-white border border-gray text-slate-600 rounded-md hover:bg-danger hover:border-danger hover:text-white">
                     <MdOutlineDelete/>
                 </button>
             </div>

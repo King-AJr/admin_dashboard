@@ -7,6 +7,11 @@ module.exports = {
     extend: {
       fontFamily: {
         poppins: ['Poppins'],
+        jarkata: ['Plus Jakarta Sans']
+      },
+      colors: {
+        mygrey: '#EDEDED',
+        myRed: '#EB2930'
       }
     },
   },

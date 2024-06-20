@@ -5,11 +5,9 @@ import { IoEye } from 'react-icons/io5';
 
 const OrdersListRow = ({ order, id, status, orderId, customerImage, customerName, quantity, price, statusColor, date  }) => {
   const [editTooltip, setEditTooltip] = useState(false);
-  const [printTooltip, setPrintTooltip] = useState(false);
-  const [viewTooltip, setViewTooltip] = useState(false);
 
   return (
-    <tr className="bg-white border-b border-gray6 last:border-0 text-start mx-9">
+    <tr className="bg-white border-b last:border-0 text-start mx-9">
       <td className="pr-3 whitespace-nowrap">
         <div className="tp-checkbox">
           <input id={`product-${id}`} type="checkbox" />
@@ -33,22 +31,12 @@ const OrdersListRow = ({ order, id, status, orderId, customerImage, customerName
       <td className="text-xs px-5 py-3 font-normal text-[#55585B] text-end">{date}</td>
       <td className="px-9 py-3 text-end">
         <div className="flex items-center justify-end space-x-2">
-          <div className="relative">
+          <div className="relative bg-green-500 border rounded-lg">
             <button
-              className="w-auto px-3 h-10 leading-10 text-tiny bg-success text-white rounded-md hover:bg-green-600"
-              onMouseEnter={() => setEditTooltip(true)}
-              onMouseLeave={() => setEditTooltip(false)}
+              className="w-auto px-3 h-10 text-xs  text-black rounded-md"
             >
               View Details
             </button>
-            {editTooltip && (
-              <div className="flex flex-col items-center z-50 absolute left-1/2 transform -translate-x-1/2 bottom-full mb-1">
-                <span className="relative z-10 p-2 text-xs leading-none font-medium text-white whitespace-no-wrap w-max bg-slate-800 rounded py-1 px-2 inline-block">
-                  Details
-                </span>
-                <div className="w-3 h-3 -mt-2 rotate-45 bg-black"></div>
-              </div>
-            )}
           </div>
         </div>
       </td>
@@ -56,38 +44,18 @@ const OrdersListRow = ({ order, id, status, orderId, customerImage, customerName
         <div className="flex items-center justify-end space-x-2">
           <div className="flex items-center justify-center relative">
             <button
-              className="w-auto px-5 h-10 leading-10 text-tiny bg-gray text-black rounded-md hover:bg-theme hover:text-white"
-              onMouseEnter={() => setPrintTooltip(true)}
-              onMouseLeave={() => setPrintTooltip(false)}
+              className="w-auto px-5 h-10 leading-10 text-sm bg-gray text-black rounded-md"
             >
                 <IoIosPrint size={18}/>
             </button>
-            {printTooltip && (
-              <div className="flex flex-col items-center z-50 absolute left-1/2 transform -translate-x-1/2 bottom-full mb-1">
-                <span className="relative z-10 p-2 text-xs leading-none font-medium text-white whitespace-no-wrap w-max bg-slate-800 rounded py-1 px-2 inline-block">
-                  Print
-                </span>
-                <div className="w-3 h-3 -mt-2 rotate-45 bg-black"></div>
-              </div>
-            )}
           </div>
           <div className="flex justify-center items-center relative">
     <a
         href="order-details.html"
-        className="flex justify-center items-center w-10 h-10 text-tiny bg-gray text-black rounded-md hover:bg-theme hover:text-white"
-        onMouseEnter={() => setViewTooltip(true)}
-        onMouseLeave={() => setViewTooltip(false)}
+        className="flex justify-center items-center w-10 h-10 text-sm bg-gray text-black rounded-md"
     >
         <IoEye/>
     </a>
-    {viewTooltip && (
-        <div className="flex flex-col items-center z-50 absolute left-1/2 transform -translate-x-1/2 bottom-full mb-1">
-            <span className="relative z-10 p-2 text-xs leading-none font-medium text-white whitespace-no-wrap w-max bg-slate-800 rounded py-1 px-2 inline-block">
-                View
-            </span>
-            <div className="w-3 h-3 -mt-2 rotate-45 bg-black"></div>
-        </div>
-    )}
 </div>
 
         </div>
