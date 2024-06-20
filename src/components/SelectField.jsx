@@ -1,22 +1,45 @@
-// src/components/SelectField.jsx
 import React from 'react';
+import Select from 'react-select';
 
-const SelectField = ({ label, options, value, onChange, name }) => {
+const SelectField = ({ label, options, value, onChange, name, multiple = false }) => {
+  const handleChange = (selectedOptions) => {
+    if (multiple) {
+      const values = selectedOptions ? selectedOptions.map(option => option.value) : [];
+      onChange({
+        target: {
+          name: name,
+          value: values
+        }
+      });
+    } else {
+      onChange({
+        target: {
+          name: name,
+          value: selectedOptions ? selectedOptions.value : ''
+        }
+      });
+    }
+  };
+
   return (
     <div className="w-full px-2 mb-4">
-      <label className="pb-2 block text-sm font-medium text-gray-700">{label}</label>
-      <select
-        value={value}
-        onChange={onChange}
+      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor={name}>
+        {label}
+      </label>
+      <Select
+        id={name}
         name={name}
-        className="h-[36px] mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-      >
-        {options.map((option, idx) => (
-          <option key={idx} value={option.value}>{option.label}</option>
-        ))}
-      </select>
+        options={options}
+        value={options.filter(option => value.includes(option.value))}
+        onChange={handleChange}
+        isMulti={multiple}
+        className="basic-multi-select"
+        classNamePrefix="select"
+      />
     </div>
   );
 };
+
+
 
 export default SelectField;

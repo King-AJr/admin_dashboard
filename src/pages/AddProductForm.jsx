@@ -25,13 +25,25 @@ const AddProductForm = () => {
     images: [],
     brandName: '',
     productType: '',
-    categoryName: '',
+    categories: [], // Changed from categoryName to categories
     attributes: [],
     variations: []
   });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    
+    if (name === 'categories') {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value
+      }));
+    }
   };
 
   const handleDescriptionChange = (name, value) => {
@@ -104,13 +116,13 @@ const AddProductForm = () => {
     });
   };
 
-  const generateSKU = (title, brandName, categoryName, attributes) => {
+  const generateSKU = (title, brandName, categories, attributes) => {
     const titleAbbr = title.split(' ').map(word => word[0]).join('').toUpperCase();
     const brandAbbr = brandName.split(' ').map(word => word[0]).join('').toUpperCase();
-    const categoryAbbr = categoryName.split(' ').map(word => word[0]).join('').toUpperCase();
+    const categoriesAbbr = categories.map(category => category.split(' ').map(word => word[0]).join('').toUpperCase()).join('');
     const attributesAbbr = attributes.map(attr => attr.name[0] + attr.values[0][0]).join('').toUpperCase();
 
-    return `${titleAbbr}${brandAbbr}${categoryAbbr}${attributesAbbr}`.slice(0, 6);
+    return `${titleAbbr}${brandAbbr}${categoriesAbbr}${attributesAbbr}`.slice(0, 6);
   };
 
   const handleSubmit = async (e) => {
@@ -127,7 +139,7 @@ const AddProductForm = () => {
         }));
       }
 
-      const sku = generateSKU(formData.title, formData.brandName, formData.categoryName, formData.attributes);
+      const sku = generateSKU(formData.title, formData.brandName, formData.categories, formData.attributes);
 
       const productData = {
         stock: formData.stock,
@@ -139,7 +151,7 @@ const AddProductForm = () => {
         images: uploadedImageUrls,
         brandName: formData.brandName,
         productType: formData.productType,
-        categoryName: formData.categoryName,
+        categories: formData.categories,
         attributes: formData.attributes,
         variations: formData.variations
       };
@@ -159,7 +171,7 @@ const AddProductForm = () => {
         images: [],
         brandName: '',
         productType: '',
-        categoryName: '',
+        categories: [],
         attributes: [],
         variations: []
       });
@@ -199,11 +211,12 @@ const AddProductForm = () => {
               name="brandName"
             />
             <SelectField
-              label="Category Name"
+              label="Category Names"
               options={categories.map(category => ({ value: category.name, label: category.name }))}
-              value={formData.categoryName}
+              value={formData.categories}
               onChange={handleChange}
-              name="categoryName"
+              name="categories"
+              multiple // Add this attribute to enable multiple selections
             />
           </div>
           <ProductAttributeForm formData={formData} setFormData={setFormData} />
